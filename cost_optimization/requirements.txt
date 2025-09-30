@@ -2,5 +2,5 @@ streamlit==1.29.0
 pandas==2.1.1
 numpy==1.25.2
 matplotlib==3.8.1
-prophet==1.2
+prophet==1.1.7
 tensorflow==2.14.0
