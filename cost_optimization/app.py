@@ -40,7 +40,9 @@ def lstm_forecast(df, days=30, lookback=3):
     for _ in range(days):
         pred = model.predict(input_seq, verbose=0)[0][0]
         predictions.append(pred)
-        input_seq = np.append(input_seq[:,1:,:], [[pred]], axis=1)
+        # Fix: reshape pred to match LSTM input
+        input_seq = np.append(input_seq[:,1:,:], np.array(pred).reshape((1,1,1)), axis=1)
+    
     future_dates = pd.date_range(df['Timestamp'].iloc[-1]+pd.Timedelta(days=1), periods=days)
     return pd.DataFrame({'Timestamp': future_dates, 'CPU': predictions})
 
